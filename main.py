@@ -4,6 +4,8 @@ import logging
 from dotenv import load_dotenv
 import os
 
+import random
+
 load_dotenv()
 
 token = os.getenv('DISCORD_TOKEN')
@@ -42,5 +44,10 @@ async def on_message(message):
 @bot.command() #creating a bot command
 async def hello(ctx):
     await ctx.send(f"Hello {ctx.author.mention}!")
+
+@bot.command() 
+async def funfact(ctx):
+    randNum = random.randint(0, len(funFacts))
+    await ctx.send(funFacts[randNum])
 
 bot.run(token, log_handler=handler, log_level=logging.DEBUG)
